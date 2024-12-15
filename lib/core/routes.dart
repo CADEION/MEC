@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mec_frontend/presentation/screens/auth/login_screen.dart';
 import 'package:mec_frontend/presentation/screens/auth/providers/login_provider.dart';
+import 'package:mec_frontend/presentation/screens/auth/providers/signup_provider.dart';
 import 'package:mec_frontend/presentation/screens/auth/sign_up_screen.dart';
+import 'package:mec_frontend/presentation/screens/home/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class Routes {
@@ -17,8 +19,15 @@ class Routes {
                 child: const LoginScreen()));
 
       case SignUpScreen.routeName:
-        return MaterialPageRoute(builder: (context) => const SignUpScreen());
+        return MaterialPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+                create: (BuildContext context) {
+                  return SignupProvider(context);
+                },
+                child: const SignUpScreen()));
 
+      case HomeScreen.routeName:
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
       default:
         return null;
     }

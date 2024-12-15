@@ -4,23 +4,29 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../core/ui.dart';
 
 class PrimaryTextField extends StatelessWidget {
-  PrimaryTextField(
-      {super.key,
-      required this.labelText,
-      required this.textEditingController,
-      this.textInputType = TextInputType.text});
   final String labelText;
   final TextEditingController textEditingController;
-  TextInputType textInputType;
+  final String? Function(String?)? validators;
+  final TextInputType textInputType;
+
+  PrimaryTextField({
+    super.key,
+    required this.labelText,
+    required this.textEditingController,
+    this.validators,
+    this.textInputType = TextInputType.text,
+  });
 
   @override
   Widget build(BuildContext context) {
     return VxTextField(
-        borderRadius: 10,
-        borderColor: MyColors.accent,
-        borderType: VxTextFieldBorderType.roundLine,
-        labelText: labelText,
-        controller: textEditingController,
-        keyboardType: textInputType);
+      borderRadius: 10,
+      borderColor: MyColors.accent,
+      borderType: VxTextFieldBorderType.roundLine,
+      labelText: labelText,
+      controller: textEditingController,
+      keyboardType: textInputType,
+      validator: validators,
+    );
   }
 }

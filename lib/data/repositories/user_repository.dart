@@ -10,40 +10,35 @@ class UserRepository {
   Future<UserModel> createAccount(
       {required String email, required String password}) async {
     try {
-      Response response = await api.sendRequest.post("user/createAccount");
+      Response response = await api.sendRequest.post("user/createAccount",
+          data: jsonEncode({"email": email, "password": password}));
+
       ApiResponse apiResponse = ApiResponse.fromResponse(response);
 
       if (!apiResponse.success) {
         throw apiResponse.message.toString();
       }
-      return userModelFromJson(apiResponse.data);
-    } catch (e) {
+
+      return UserModel.fromJson(apiResponse.data);
+    } catch (ex) {
       rethrow;
     }
   }
 
-  Future<UserModel> signIn({
-    required String email,
-    required String password
-  }) async {
+  Future<UserModel> signIn(
+      {required String email, required String password}) async {
     try {
-      Response response = await api.sendRequest.post(
-        "user/signIn",
-        data: jsonEncode({
-          "email": email,
-          "password": password
-        })
-      );
+      Response response = await api.sendRequest.post("user/signIn",
+          data: jsonEncode({"email": email, "password": password}));
 
       ApiResponse apiResponse = ApiResponse.fromResponse(response);
 
-      if(!apiResponse.success) {
+      if (!apiResponse.success) {
         throw apiResponse.message.toString();
       }
 
       return UserModel.fromJson(apiResponse.data);
-    }
-    catch(ex) {
+    } catch (ex) {
       rethrow;
     }
   }
