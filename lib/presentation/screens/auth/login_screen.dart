@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           children: [
 
-            (loginProvider.error == " " ? SizedBox() : Text(loginProvider.error)),
+            (loginProvider.error == "" ? SizedBox() : Text(loginProvider.error)),
 
             const GapWidget(),
             PrimaryTextField(
